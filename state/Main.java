@@ -26,20 +26,24 @@ public class Main {
         System.out.println("please write your password(Admin0000):");
         String password = scanner.next();
         if(password.equals("Admin0000")){
-            loggedState.handleAuth(context);
+            context.setState(loggedState);
+            // loggedState.handleAuth(context);
             shouldLogout(context, guestState, loggedState, bannedState, loggedOutState, scanner);
         }
         else{
-            bannedState.handleAuth(context);
+            context.setState(bannedState);
+            // bannedState.handleAuth(context);
         }
     }
 
     public static void shouldLogout( AuthContext context, GuestState guestState, LoggedState loggedState, BannedState bannedState, LoggedOutState loggedOutState, Scanner scanner){
         System.out.println("Do you want to log out?(Y o N) ");
         String logout = scanner.next();
-        if(logout.equals("Y")){                
-            loggedOutState.handleAuth(context);
-            guestState.handleAuth(context);
+        if(logout.equals("Y")){           
+            context.setState(loggedOutState);
+            context.setState(guestState);     
+            // loggedOutState.handleAuth(context);
+            // guestState.handleAuth(context);
             startSession(context, guestState, loggedState, bannedState, loggedOutState, scanner);
         }
         else{
